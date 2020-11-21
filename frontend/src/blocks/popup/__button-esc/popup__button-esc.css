@@ -1,0 +1,8 @@
+.popup__button-esc {
+    transform: translate(75%, -75%);
+    position: absolute;
+    top: 0;
+    right: 0;
+    background-color: transparent;
+    border: none;
+}

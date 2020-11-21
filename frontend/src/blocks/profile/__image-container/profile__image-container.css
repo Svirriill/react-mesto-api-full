@@ -1,0 +1,29 @@
+.profile__image-container {
+    height: 120px;
+    width: 120px;
+    border-radius: 50%;
+    position: relative;
+    margin: auto;
+  }
+  
+  .profile__image-container:after {
+    content: url(../../../images/VectorEdit.svg);
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    opacity: 0;
+  }
+  
+  .profile__image-container:hover {
+    cursor: pointer;
+  }
+  
+  .profile__image-container:hover:after {
+    opacity: 1;
+  }
+  
+  .profile__image-container:hover .profile__image {
+    opacity: 0.2;
+  }
+  

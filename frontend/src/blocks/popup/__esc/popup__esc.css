@@ -1,0 +1,16 @@
+.popup__esc {
+    max-width: 41px;
+    min-height: 41px;
+}
+
+.popup__esc:hover {
+    opacity: 0.6;
+    cursor: pointer;
+}
+
+@media screen and (max-width: 600px) {
+    .popup__esc {
+        max-width: 21px;
+        min-height: 21px;
+    }
+}
