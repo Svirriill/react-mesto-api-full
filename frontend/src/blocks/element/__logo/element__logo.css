@@ -1,8 +1,0 @@
-.element__logo {
-    padding-left: auto;
-}
-
-.element__logo:hover {
-    opacity: 0.6;
-    cursor: pointer;
-}
