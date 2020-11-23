@@ -24,30 +24,26 @@ module.exports.getCards = (req, res) => {
 };
 
 module.exports.deleteCard = (req, res, next) => {
-  Card.findByIdAndRemove(req.params.id)
-    .orFail()
-    .catch(() => {
-      throw new NotFoundError({ message: 'Нет карточки с таким id' });
-    })
+  Card.findById(req.params._id)
+    .orFail(new NotFoundError('Нет карточки с таким id'))
     .then((card) => {
       if (card.owner.toString() !== req.user._id) {
         throw new ForbiddenError({ message: 'Недостаточно прав для выполнения операции' });
       }
-      res.send({ data: card });
+      Card.findByIdAndRemove(req.params._id)
+        .then((cardData) => res.send({ data: cardData }))
+        .catch(next);
     })
     .catch(next);
 };
 
 module.exports.likeCard = (req, res, next) => {
   Card.findByIdAndUpdate(
-    req.params.id,
+    req.params._id,
     { $addToSet: { likes: req.user._id } },
     { new: true },
   )
-    .orFail()
-    .catch(() => {
-      throw new NotFoundError({ message: 'Нет карточки с таким id' });
-    })
+    .orFail(new NotFoundError('Нет карточки с таким id'))
     .then((card) => {
       res.send({ data: card });
     })
@@ -56,14 +52,11 @@ module.exports.likeCard = (req, res, next) => {
 
 module.exports.dislikeCard = (req, res, next) => {
   Card.findByIdAndUpdate(
-    req.params.id,
+    req.params._id,
     { $pull: { likes: req.user._id } },
     { new: true },
   )
-    .orFail()
-    .catch(() => {
-      throw new NotFoundError({ message: 'Нет карточки с таким id' });
-    })
+    .orFail(new NotFoundError('Нет карточки с таким id'))
     .then((card) => {
       res.send({ data: card });
     })

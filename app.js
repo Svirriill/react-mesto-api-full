@@ -58,7 +58,7 @@ app.use((err, req, res, next) => {
     res.status(err.status).send(err.message);
     return;
   }
-  res.status(500).send({ message: `${err.message}` });
+  res.status(500).send({ message: `Ошибка сервера: ${err.message}` });
   next();
 });
 

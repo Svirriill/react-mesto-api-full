@@ -10,8 +10,8 @@ const {
 
 routesCards.get('/', getCards);
 routesCards.post('/', validateCard, createCard);
-routesCards.delete('/:id', validateId, deleteCard);
-routesCards.put('/:id/likes', validateId, likeCard);
-routesCards.delete('/:id/likes', validateId, dislikeCard);
+routesCards.delete('/:_id', validateId, deleteCard);
+routesCards.put('/:_id/likes', validateId, likeCard);
+routesCards.delete('/:_id/likes', validateId, dislikeCard);
 
 module.exports = routesCards;

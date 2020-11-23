@@ -45,14 +45,18 @@ module.exports.getUsers = (req, res, next) => {
 };
 
 module.exports.getUser = (req, res, next) => {
-  User.findById(req.params.id)
-    .orFail()
-    .catch(() => {
-      throw new NotFoundError({ message: 'Нет пользователя с таким id' });
-    })
+  User.findById(req.params._id)
+    .orFail(new NotFoundError('Нет пользователя с таким id'))
     .then((user) => {
       res.status(200).send(user);
     })
+    .catch(next);
+};
+
+module.exports.getCurrentUser = (req, res, next) => {
+  User.findById(req.user._id)
+    .orFail(new NotFoundError('Нет пользователя с таким id'))
+    .then((user) => res.send(user))
     .catch(next);
 };
 
