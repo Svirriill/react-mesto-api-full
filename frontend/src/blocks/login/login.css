@@ -1,0 +1,15 @@
+@import url('./__title/login__title.css');
+@import url('./__field/login__field.css');
+@import url('./__button/login__button.css');
+@import url('./__link/login__link.css');
+@import url('./__link-href/login__link-href.css');
+
+.login {
+    font-family: "Inter";
+    height: 572px;
+    max-width: 358px;
+    width: 100%;
+    display: block;
+    margin: 0 auto;
+    color: #ffffff;
+}

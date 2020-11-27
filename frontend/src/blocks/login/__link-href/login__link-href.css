@@ -1,0 +1,16 @@
+.login__link-href {
+    font-style: normal;
+    font-weight: normal;
+    font-size: 14px;
+    line-height: 17px;
+    text-decoration: none;
+    color: #ffffff;
+    padding-left: 72px;
+    margin-block-start: 0;
+    margin-block-end: 0;
+}
+
+.login__link-href:hover {
+    cursor: pointer;
+    opacity: 0.6;
+}
