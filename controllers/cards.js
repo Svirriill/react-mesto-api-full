@@ -12,14 +12,14 @@ module.exports.createCard = (req, res, next) => {
       throw new BadRequestError({ message: 'Указаны некорректные данные' });
     })
     .then((card) => {
-      res.send({ data: card });
+      res.send(card);
     })
     .catch(next);
 };
 
 module.exports.getCards = (req, res, next) => {
   Card.find({})
-    .then((card) => res.status(200).send({ data: card }))
+    .then((card) => res.status(200).send(card))
     .catch(next);
 };
 
@@ -44,8 +44,8 @@ module.exports.likeCard = (req, res, next) => {
     { new: true },
   )
     .orFail(new NotFoundError('Нет карточки с таким id'))
-    .then((card) => {
-      res.send({ data: card });
+    .then((cards) => {
+      res.send(cards);
     })
     .catch(next);
 };
@@ -57,8 +57,8 @@ module.exports.dislikeCard = (req, res, next) => {
     { new: true },
   )
     .orFail(new NotFoundError('Нет карточки с таким id'))
-    .then((card) => {
-      res.send({ data: card });
+    .then((cards) => {
+      res.send(cards);
     })
     .catch(next);
 };

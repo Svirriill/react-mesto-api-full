@@ -9,7 +9,11 @@ const { NODE_ENV, JWT_SECRET } = process.env;
 
 module.exports.createUser = (req, res, next) => {
   const {
-    email, password,
+    // name,
+    // about,
+    // avatar,
+    email,
+    password,
   } = req.body;
 
   User.findOne({ email })
@@ -22,13 +26,16 @@ module.exports.createUser = (req, res, next) => {
           name: 'Жак-Ив Куссто',
           about: 'Исследователь',
           avatar: 'https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png',
+          // name,
+          // about,
+          // avatar,
           email,
           password: hash,
         }))
-        .then(({ name, about, avatar }) => {
+        .then(() => {
           res.status(201).send({
             data: {
-              name, about, avatar, email,
+              email,
             },
           });
         })
@@ -78,7 +85,9 @@ module.exports.updateProfile = (req, res, next) => {
       }
       throw new BadRequestError({ message: 'Указаны некорректные данные' });
     })
-    .then((user) => res.send({ data: user }))
+    .then((user) => {
+      res.send(user);
+    })
     .catch(next);
 };
 
@@ -86,7 +95,7 @@ module.exports.updateAvatar = (req, res, next) => {
   const { avatar } = req.body;
 
   User.findByIdAndUpdate(
-    req.params._id,
+    req.user._id,
     { avatar },
     {
       new: true,
@@ -101,7 +110,7 @@ module.exports.updateAvatar = (req, res, next) => {
       }
       throw new BadRequestError({ message: 'Указаны некорректные данные' });
     })
-    .then((user) => res.send({ data: user }))
+    .then((user) => res.send(user))
     .catch(next);
 };
 
@@ -115,14 +124,7 @@ module.exports.login = (req, res, next) => {
         NODE_ENV === 'production' ? JWT_SECRET : 'dev-secret',
         { expiresIn: '7d' },
       );
-      // res.send({ token });
-      res
-        .cookie('jwt', token, {
-          maxAge: 3600000 * 24 * 7,
-          httpOnly: true,
-          sameSite: true,
-        })
-        .send({ message: `Успешная авторизация. Ваш токен: ${token}` });
+      res.send({ token });
     })
     .catch(next);
 };
