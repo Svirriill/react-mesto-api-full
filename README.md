@@ -1,7 +1,5 @@
 # Проектная работа №15 "Mesto"
 
-### Ссылки:
+### Ссылкa:
 
-https://mestoproject.nomoreparties.xyz/
-
-https://github.com/Svirriill/react-mesto-auth
+https://api.mestoproject.students.nomoredomains.icu
