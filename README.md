@@ -2,4 +2,4 @@
 
 ### Ссылкa:
 
-https://api.mestoproject.students.nomoredomains.icu
+https://mestoproject.students.nomoredomains.icu
