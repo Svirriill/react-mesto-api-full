@@ -143,6 +143,7 @@ function App() {
   }
 
   const handleRegister = (password, email) => {
+    tokenCheck();
     auth
       .register(password, email)
       .then((res) => {
@@ -158,6 +159,7 @@ function App() {
   }
 
   const handleLogin = (password, email) => {
+    tokenCheck();
     auth
       .login(password, email)
       .then((data) => {
