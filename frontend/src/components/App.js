@@ -38,7 +38,7 @@ function App() {
   React.useEffect(() => {
     tokenCheck();
   }, []);
-  
+
   function handleInfoTooltip(login) {
     login ? setLoggedIn(true) : setLoggedIn(false);
     setIsOpenPopupInfoTooltip(true);
@@ -151,7 +151,7 @@ function App() {
     auth
       .register(password, email)
       .then((res) => {
-        history.push('/sign-in');
+        history.push('/signin');
         handleInfoTooltip(true);
       })
       .catch((err) => {
@@ -221,14 +221,14 @@ function App() {
             />
             <Footer />
           </ProtectedRoute>
-          <Route path="/sign-up">
+          <Route path="/signup">
             <Register onRegister={handleRegister} />
           </Route>
-          <Route path="/sign-in">
+          <Route path="/signin">
             <Login onLogin={handleLogin} />
           </Route>
           <Route>
-            {loggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />}
+            {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}
           </Route>
         </Switch>
         <EditProfilePopup
