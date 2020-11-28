@@ -37,7 +37,7 @@ function Main(props) {
         </button>
       </section>
       <ul className="elements">
-        {cards.map((card) => (
+        { (cards.length > 0) && cards.map((card) => (
           <Card key={card._id} card={card} onCardClick={onCardClick} onCardLike={onCardLike} onCardDelete={onCardDelete} />
         ))}
       </ul>
