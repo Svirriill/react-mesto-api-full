@@ -2,4 +2,4 @@
 
 ### Ссылкa:
 
-https://mestoproject.students.nomoredomains.icu
+https://svirriill.students.nomoreparties.space

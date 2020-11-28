@@ -44,7 +44,7 @@ const Login = (props) => {
                 onChange={evt => setPassword(evt.target.value)}
                 required />
             <button className="login__button" type="submit">Войти</button>
-            <Link className="login__link" to="/sign-up"> Регистрация</Link>
+            <Link className="login__link" to="/signup"> Регистрация</Link>
         </form>
     )
 }

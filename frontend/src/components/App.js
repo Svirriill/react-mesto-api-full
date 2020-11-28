@@ -150,7 +150,7 @@ function App() {
       .register(password, email)
       .then((res) => {
         console.log(res);
-        history.push('/sign-in');
+        history.push('/signin');
         handleInfoTooltip(true);
       })
       .catch((err) => {
@@ -227,14 +227,14 @@ function App() {
             />
             <Footer />
           </ProtectedRoute>
-          <Route path="/sign-up">
+          <Route path="/signup">
             <Register onRegister={handleRegister} />
           </Route>
-          <Route path="/sign-in">
+          <Route path="/signin">
             <Login onLogin={handleLogin} />
           </Route>
           <Route>
-            {isLoggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />}
+            {isLoggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}
           </Route>
         </Switch>
         <EditProfilePopup
