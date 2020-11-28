@@ -31,27 +31,26 @@ function App() {
     link: '',
     name: '',
   });
-  const [loggedIn, setLoggedIn] = React.useState(false);
+  const [isLoggedIn, setIsLoggedIn] = React.useState(false);
+  const [isSuccsess, setIsSuccsess] = React.useState(false);
 
   const history = useHistory();
 
-  React.useEffect(() => {
-    tokenCheck();
-  }, []);
-
   function handleInfoTooltip(login) {
-    login ? setLoggedIn(true) : setLoggedIn(false);
+    login ? setIsSuccsess(true) : setIsSuccsess(false);
     setIsOpenPopupInfoTooltip(true);
   }
 
   React.useEffect(() => {
-    Promise.all([api.getInitialCards(), api.getUserInfo()])
-      .then((res) => {
-        setCurrentUser(res[1]);
-        setCards(res[0]);
-      })
-      .catch((err) => console.log(err));
-  }, [loggedIn]);
+    if (isLoggedIn) {
+      Promise.all([api.getInitialCards(), api.getUserInfo()])
+        .then((res) => {
+          setCurrentUser(res[1]);
+          setCards(res[0]);
+        })
+        .catch((err) => console.log(err));
+    }
+  }, [isLoggedIn]);
 
   function handleCardLike(card) {
     const isLiked = card.likes.some((i) => i === currentUser._id);
@@ -79,7 +78,6 @@ function App() {
     setConfirmPopupOpen(true);
     setCardToDelete(card);
   }
-
 
   function handleEditAvatarClick() {
     setEditAvatarPopupOpen(true);
@@ -151,7 +149,8 @@ function App() {
     auth
       .register(password, email)
       .then((res) => {
-        history.push('/signin');
+        console.log(res);
+        history.push('/sign-in');
         handleInfoTooltip(true);
       })
       .catch((err) => {
@@ -167,13 +166,16 @@ function App() {
       .login(password, email)
       .then((data) => {
         if (data.token) {
-          setLoggedIn(true);
+          // setLoggedIn(true);
+          setIsLoggedIn(true);
           handleInfoTooltip(true);
           history.push('/');
+        } else {
+          setIsLoggedIn(true);
+          handleInfoTooltip(false);
         }
       })
       .catch((err) => {
-        handleInfoTooltip(false);
         if (err === 400) {
           console.log('Не передано одно из полей Статус ошибки: ' + err);
         } else if (err === 401) {
@@ -188,7 +190,7 @@ function App() {
       auth.getContent(jwt)
         .then((res) => {
           if (res) {
-            setLoggedIn(true);
+            setIsLoggedIn(true);
             history.push('/');
           }
         })
@@ -201,6 +203,10 @@ function App() {
     }
   }
 
+  React.useEffect(() => {
+    tokenCheck();
+  }, []);
+
   return (
     <div className="page">
       <CurrentUserContext.Provider value={currentUser}>
@@ -208,7 +214,7 @@ function App() {
         <Switch>
           <ProtectedRoute
             exact path="/"
-            loggedIn={loggedIn}>
+            loggedIn={isLoggedIn}>
             <Main
               cards={cards}
               onCardClick={handleCardClick}
@@ -221,14 +227,14 @@ function App() {
             />
             <Footer />
           </ProtectedRoute>
-          <Route path="/signup">
+          <Route path="/sign-up">
             <Register onRegister={handleRegister} />
           </Route>
-          <Route path="/signin">
+          <Route path="/sign-in">
             <Login onLogin={handleLogin} />
           </Route>
           <Route>
-            {loggedIn ? <Redirect to="/" /> : <Redirect to="/signin" />}
+            {isLoggedIn ? <Redirect to="/" /> : <Redirect to="/sign-in" />}
           </Route>
         </Switch>
         <EditProfilePopup
@@ -262,7 +268,7 @@ function App() {
         <InfoTooltip
           isOpen={isInfoTooltipPopupOpen}
           onClose={closeAllPopups}
-          loggedIn={loggedIn}
+          loggedIn={isLoggedIn}
         />
       </CurrentUserContext.Provider >
     </div>
