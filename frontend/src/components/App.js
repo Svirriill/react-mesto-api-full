@@ -35,10 +35,15 @@ function App() {
 
   const history = useHistory();
 
+  React.useEffect(() => {
+    tokenCheck();
+  }, []);
+  
   function handleInfoTooltip(login) {
     login ? setLoggedIn(true) : setLoggedIn(false);
     setIsOpenPopupInfoTooltip(true);
   }
+
   React.useEffect(() => {
     Promise.all([api.getInitialCards(), api.getUserInfo()])
       .then((res) => {
@@ -143,7 +148,6 @@ function App() {
   }
 
   const handleRegister = (password, email) => {
-    tokenCheck();
     auth
       .register(password, email)
       .then((res) => {
@@ -159,7 +163,6 @@ function App() {
   }
 
   const handleLogin = (password, email) => {
-    tokenCheck();
     auth
       .login(password, email)
       .then((data) => {
@@ -197,10 +200,6 @@ function App() {
         });
     }
   }
-
-  React.useEffect(() => {
-    tokenCheck();
-  }, []);
 
   return (
     <div className="page">
