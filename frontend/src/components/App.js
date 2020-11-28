@@ -268,7 +268,7 @@ function App() {
         <InfoTooltip
           isOpen={isInfoTooltipPopupOpen}
           onClose={closeAllPopups}
-          loggedIn={isLoggedIn}
+          loggedIn={isSuccsess}
         />
       </CurrentUserContext.Provider >
     </div>
