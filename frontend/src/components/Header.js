@@ -7,7 +7,7 @@ function Header() {
     const [email, setEmail] = React.useState('');
     const [sign, setSign] = React.useState('');
     const [login, setLogin] = React.useState(false);
-    const [loginLink, setLoginLink] = React.useState('/signin');
+    const [loginLink, setLoginLink] = React.useState('/sign-in');
     const history = useHistory();
     let location = useLocation();
 
@@ -31,21 +31,21 @@ function Header() {
     React.useEffect(() => {
         if (location.pathname === '/') {
             setLogin(true);
-            setLoginLink('/signin');
+            setLoginLink('/sign-in');
             setSign('Выйти');
-        } else if (location.pathname === '/signin') {
+        } else if (location.pathname === '/sign-in') {
             setLogin(false);
-            setLoginLink('/signin');
+            setLoginLink('/sign-in');
             setSign('');
         } else {
-            setLoginLink('/signup');
+            setLoginLink('/sign-up');
         }
     }, [location.pathname]);
 
         const onSignOut = () => {
         localStorage.removeItem('token');
         setEmail('');
-        history.push('/signin');
+        history.push('/sign-in');
     }
 
     return (
