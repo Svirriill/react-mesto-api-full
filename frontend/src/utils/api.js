@@ -117,7 +117,7 @@ export class Api {
 
 export const api = new Api({
   // baseUrl: 'http://localhost:3000',
-  baseUrl: 'https://api.mestoproject.students.nomoreparties.xyz',
+  baseUrl: 'https://api.mestoproject.students.nomoredomains.icu',
 
   headers: {
     // authorization: 'dc3c97d1-1035-4b28-91f1-6584655ffbcb',
