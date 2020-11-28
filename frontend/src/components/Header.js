@@ -51,16 +51,10 @@ function Header() {
     return (
         <header className="header">
             <img className="header__logo" src={logo} alt="лого" />
-            <BrowserRouter>
-                <Switch>
-                    <Route>
                         <div className="header__navigation">
                             <p className="header__email">{email}</p>
                             {login ? <p onClick={onSignOut} className="header__sign-out">Выйти</p> : <Link to={loginLink} className="header__sign-out">{sign}</Link>}
                         </div>
-                    </Route>
-                </Switch>
-            </BrowserRouter>
         </header>
     );
 }
