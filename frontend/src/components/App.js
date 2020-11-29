@@ -149,7 +149,6 @@ function App() {
     auth
       .register(password, email)
       .then((res) => {
-        console.log(res);
         history.push('/signin');
         handleInfoTooltip(true);
       })

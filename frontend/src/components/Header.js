@@ -1,6 +1,6 @@
 import React from 'react';
 import logo from "../images/Vector.svg";
-import { BrowserRouter, Route, Switch, Link, useHistory, useLocation } from 'react-router-dom';
+import { Link, useHistory, useLocation } from 'react-router-dom';
 import * as auth from './auth';
 
 function Header() {

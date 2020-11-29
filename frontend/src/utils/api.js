@@ -116,8 +116,8 @@ export class Api {
 }
 
 export const api = new Api({
-  // baseUrl: 'http://localhost:3000',
-  baseUrl: 'https://api.svirriill.students.nomoreparties.space',
+  baseUrl: 'http://localhost:3000',
+  // baseUrl: 'https://api.svirriill.students.nomoreparties.space',
   headers: {
     // authorization: 'dc3c97d1-1035-4b28-91f1-6584655ffbcb',
     // 'Content-Type': 'application/json'
