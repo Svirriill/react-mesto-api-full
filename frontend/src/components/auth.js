@@ -1,5 +1,5 @@
-export const BASE_URL = process.env !== 'dev' ? 'http://localhost:3000' : 'https://api.svirriill.students.nomoreparties.space';
-
+export const BASE_URL = 'https://api.svirriill.students.nomoreparties.space';
+// вообще не понял как править комментарий про урлы
 export const register = (password, email) => {
     return fetch(`${BASE_URL}/signup`, {
         method: 'POST',
