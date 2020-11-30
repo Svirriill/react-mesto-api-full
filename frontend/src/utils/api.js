@@ -85,7 +85,7 @@ export class Api {
   }
 
   changeLikeCardStatus(cardId, isLiked) {
-    return fetch(`${this._baseUrl}/cards/likes/${cardId}`, {
+    return fetch(`${this._baseUrl}/cards/${cardId}/likes`, {
       method: `${isLiked ? 'PUT' : 'DELETE'}`,
       headers: this.getHeaders(),
     })
@@ -116,8 +116,7 @@ export class Api {
 }
 
 export const api = new Api({
-  // baseUrl: 'http://localhost:3000',
-  baseUrl: 'https://api.svirriill.students.nomoreparties.space',
+  baseUrl: process.env !== 'production' ? 'http://localhost:3000' : 'https://api.svirriill.students.nomoreparties.space',
   headers: {
     // authorization: 'dc3c97d1-1035-4b28-91f1-6584655ffbcb',
     // 'Content-Type': 'application/json'

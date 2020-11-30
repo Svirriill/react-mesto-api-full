@@ -12,6 +12,7 @@ const auth = require('./middlewares/auth');
 const { login, createUser } = require('./controllers/users');
 const { validateUser, validateLogin } = require('./middlewares/requestValidation');
 const { requestLogger, errorLogger } = require('./middlewares/logger');
+const NotFoundError = require('./errors/NotFoundError');
 
 const { PORT = 3000 } = process.env;
 
@@ -53,6 +54,10 @@ app.post('/signup', validateUser, createUser);
 
 app.use('/users', auth, usersRouter);
 app.use('/cards', auth, cardsRouter);
+
+app.all('*', () => {
+  throw new NotFoundError('Страница не найдена');
+});
 
 app.use(errorLogger);
 

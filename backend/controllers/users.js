@@ -9,6 +9,9 @@ const { NODE_ENV, JWT_SECRET } = process.env;
 
 module.exports.createUser = (req, res, next) => {
   const {
+    name,
+    about,
+    avatar,
     email,
     password,
   } = req.body;
@@ -20,16 +23,13 @@ module.exports.createUser = (req, res, next) => {
       }
       bcrypt.hash(password, 10)
         .then((hash) => User.create({
-          name: 'Жак-Ив Кусто',
-          about: 'Исследователь',
-          avatar: 'https://pictures.s3.yandex.net/resources/jacques-cousteau_1604399756.png',
-          email,
+          email: req.body.email,
           password: hash,
         }))
-        .then(() => {
+        .then((user) => {
           res.status(201).send({
             data: {
-              email,
+              name, about, avatar, email: user.email,
             },
           });
         })

@@ -46,7 +46,7 @@ function App() {
       Promise.all([api.getInitialCards(), api.getUserInfo()])
         .then((res) => {
           setCurrentUser(res[1]);
-          setCards(res[0]);
+          setCards(res[0].reverse());
         })
         .catch((err) => console.log(err));
     }
