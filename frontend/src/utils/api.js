@@ -116,7 +116,7 @@ export class Api {
 }
 
 export const api = new Api({
-  baseUrl: process.env !== 'production' ? 'http://localhost:3000' : 'https://api.svirriill.students.nomoreparties.space',
+  baseUrl: process.env !== 'dev' ? 'http://localhost:3000' : 'https://api.svirriill.students.nomoreparties.space',
   headers: {
     // authorization: 'dc3c97d1-1035-4b28-91f1-6584655ffbcb',
     // 'Content-Type': 'application/json'
