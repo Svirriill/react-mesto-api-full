@@ -8,7 +8,7 @@ export class Api {
     const token = localStorage.getItem('token');
     return {
       ...this.headers,
-    'Content-Type': 'application/json',
+      'Content-Type': 'application/json',
       'Authorization': `Bearer ${token}`,
     }
   }
@@ -116,7 +116,9 @@ export class Api {
 }
 
 export const api = new Api({
-  baseUrl: process.env !== 'https://api.svirriill.students.nomoreparties.space',
+  baseUrl: process.env.NODE_ENV === 'production'
+    ? 'https://api.svirriill.students.nomoreparties.space'
+    : 'http://localhost:3000',
   headers: {
     // authorization: 'dc3c97d1-1035-4b28-91f1-6584655ffbcb',
     // 'Content-Type': 'application/json'

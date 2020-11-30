@@ -1,5 +1,7 @@
-export const BASE_URL = 'https://api.svirriill.students.nomoreparties.space';
-// вообще не понял как править комментарий про урлы
+export const BASE_URL = process.env.NODE_ENV === 'production'
+    ? 'https://api.svirriill.students.nomoreparties.space'
+    : 'http://localhost:3000';
+
 export const register = (password, email) => {
     return fetch(`${BASE_URL}/signup`, {
         method: 'POST',
@@ -47,21 +49,21 @@ export const login = (password, email) => {
                     }
                 })
         })
-    };
+};
 
-    export const getContent = (token) => {
-        return fetch(`${BASE_URL}/users/me`, {
-            method: 'GET',
-            headers: {
-                'Content-Type': 'application/json',
-                'Authorization': `Bearer ${token}`,
+export const getContent = (token) => {
+    return fetch(`${BASE_URL}/users/me`, {
+        method: 'GET',
+        headers: {
+            'Content-Type': 'application/json',
+            'Authorization': `Bearer ${token}`,
+        }
+    })
+        .then(res => {
+            if (!res.ok) {
+                return Promise.reject(res.status);
             }
+            return res.json();
         })
-            .then(res => {
-                if (!res.ok) {
-                    return Promise.reject(res.status);
-                }
-                return res.json();
-            })
-            .then(data => data)
-    };
+        .then(data => data)
+};
