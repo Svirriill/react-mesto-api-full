@@ -1,4 +1,4 @@
-export const BASE_URL = process.env !== 'dev' ? 'http://localhost:3000' : 'https://api.svirriill.students.nomoreparties.space';
+export const BASE_URL = process.env !== 'development' ? 'http://localhost:3000' : 'https://api.svirriill.students.nomoreparties.space';
 
 export const register = (password, email) => {
     return fetch(`${BASE_URL}/signup`, {
