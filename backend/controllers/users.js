@@ -15,7 +15,9 @@ module.exports.createUser = (req, res, next) => {
     email,
     password,
   } = req.body;
-
+  if (!email || !password) {
+    throw new BadRequestError({ message: 'Не переданы данные' });
+  }
   User.findOne({ email })
     .then((admin) => {
       if (admin) {
@@ -23,13 +25,19 @@ module.exports.createUser = (req, res, next) => {
       }
       bcrypt.hash(password, 10)
         .then((hash) => User.create({
+          name,
+          about,
+          avatar,
           email: req.body.email,
           password: hash,
         }))
         .then((user) => {
           res.status(201).send({
             data: {
-              name, about, avatar, email: user.email,
+              name: user.name,
+              about: user.about,
+              avatar: user.avatar,
+              email: user.email,
             },
           });
         })

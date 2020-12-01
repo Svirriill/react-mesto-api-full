@@ -6,6 +6,7 @@ const mongoose = require('mongoose');
 const bodyParser = require('body-parser');
 const helmet = require('helmet');
 const cors = require('cors');
+const { errors } = require('celebrate');
 const usersRouter = require('./routes/users');
 const cardsRouter = require('./routes/cards');
 const auth = require('./middlewares/auth');
@@ -60,8 +61,12 @@ app.all('*', () => {
 });
 
 app.use(errorLogger);
+app.use(errors());
 
 app.use((err, req, res, next) => {
+  if (err.name === 'CastError' || err.name === 'ValidationError') {
+    res.status(400);
+  }
   if (err.status) {
     res.status(err.status).send(err.message);
     return;
