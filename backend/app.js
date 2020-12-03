@@ -64,9 +64,6 @@ app.use(errorLogger);
 app.use(errors());
 
 app.use((err, req, res, next) => {
-  if (err.name === 'CastError' || err.name === 'ValidationError') {
-    res.status(400);
-  }
   if (err.status) {
     res.status(err.status).send(err.message);
     return;
